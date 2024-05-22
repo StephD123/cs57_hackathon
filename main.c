@@ -1,3 +1,6 @@
+/*
+* CS 57 Spring 2024 Hackathon
+*/
 #include<stdio.h> 
 #include<stdlib.h> 
 #include "y.tab.h"
@@ -10,6 +13,10 @@ extern int yylex_destroy();
 extern FILE *yyin;
 extern vector<string> tokens;
 
+/********************* processFile ********************/
+/*
+* open file and get array of tokens
+*/
 void processFile(char* filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -21,28 +28,26 @@ void processFile(char* filename) {
     fclose(file);
 }
 
-int min(int x, int y, int z) {
-    return min({x, y, z});
-}
-
+/********************* normalizedEditDist ********************/
+/*
+* takes two arrays and finds edit distance. Normalizes distance between 0 and 1
+*/
 double normalizedEditDist(vector<string>& v1, vector<string>& v2){
+
     float len1 = v1.size();
     float len2 = v2.size();
-    vector<vector<int>> dp(len1 + 1, vector<int>(len2 + 1));
-    for(int i = 0; i < len1; i++){
-        dp[i][0] = i; 
-    }
 
-    for (int j = 0; j <= len2; j++) {
-        dp[0][j] = j;
-    }
+    vector<vector<int>> dp(len1 + 1, vector<int>(len2 + 1));
+
+    for(int i = 0; i < len1; i++) dp[i][0] = i; 
+    for (int j = 0; j <= len2; j++) dp[0][j] = j;
 
     for (int i = 1; i <= len1; i++) {
         for (int j = 1; j <= len2; j++) {
             if (v1[i - 1] == v2[j - 1])
                 dp[i][j] = dp[i - 1][j - 1];  
             else
-                dp[i][j] = min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + 1); // Insert, Delete, Replace
+                dp[i][j] = min({dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + 1}); // Insert, Delete, Replace
         }
     }
 
@@ -88,6 +93,10 @@ float unorderedSim(vector<string> v1, vector<string> v2) {
     return per_same;
 }
 
+/********************* main ********************/
+/*
+* calculates similarity score
+*/
 int main(int argc, char* argv[]){
     if(argc != 3){
         fprintf(stderr, "Usage: %s prog1.c prog2.c\n", argv[0]);
@@ -100,4 +109,5 @@ int main(int argc, char* argv[]){
     vector<string> v2 = tokens;
     float score = (unorderedSim(v1, v2) + normalizedEditDist(v1, v2)) / 2;
     printf("Score: %f\n", score);
+    yylex_destroy();
 }

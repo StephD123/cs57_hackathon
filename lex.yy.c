@@ -835,7 +835,7 @@ case 13:
 YY_RULE_SETUP
 #line 26 "lexer.l"
 {   /* When a string has been found that is not a keyword, it is a variable/function name */
-                tokens.push_back(yytext);
+                tokens.push_back("VAR");
                 return VAR;}
 	YY_BREAK
 case 14:

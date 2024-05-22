@@ -24,9 +24,8 @@ vector<string> tokens;
 [*/+\-()=;{}<>!]      { tokens.push_back(yytext); return yytext[0]; }
 [A-Za-z0-9]+   {   /* When a string has been found that is not a keyword, it is a variable/function name */
                 tokens.push_back(yytext);
-                return VAR;
-}
-\n          { tokens.push_back(yytext); }
+                return VAR;}
+[ \n\t]         
 .           { tokens.push_back(yytext); }
 %%
 

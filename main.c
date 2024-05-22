@@ -22,11 +22,20 @@ void processFile(char* filename) {
 
 int main(int argc, char* argv[]){
     if(argc != 3){
-        fprintf(stderr, "Usage: %s prog1.c prog2.c\n", argv[1]);
+        fprintf(stderr, "Usage: %s prog1.c prog2.c\n", argv[0]);
         exit(1);
     }
     processFile(argv[1]);
-    for(auto val: tokens){
-        printf("%s\n", val.c_str());
+    vector<string> v1 = tokens; 
+    tokens.clear();
+    processFile(argv[2]);
+    vector<string> v2 = tokens;
+    
+    for(auto val: v1){
+        printf("%s ", val.c_str());
+    }
+    printf("starting second\n");
+    for(auto val: v2){
+        printf("%s ", val.c_str());
     }
 }

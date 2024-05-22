@@ -20,10 +20,7 @@ vector<string> tokens;
 "return"    {tokens.push_back(yytext); return RETURN; }
 "print"     {tokens.push_back(yytext); return PRINT; }
 "read"      {tokens.push_back(yytext); return READ; }
-[0-9]*      {   /* When a number has been found, return constant */
-                tokens.push_back(atoi(yytext));
-                return CONST;
-            }
+[0-9]*      {  tokens.push_back(yytext); return CONST; }
 [*/+\-()=;{}<>!]      { tokens.push_back(yytext); return yytext[0]; }
 [A-Za-z0-9]+   {   /* When a string has been found that is not a keyword, it is a variable/function name */
                 tokens.push_back(yytext);

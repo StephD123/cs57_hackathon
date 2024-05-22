@@ -823,19 +823,16 @@ YY_RULE_SETUP
 case 11:
 YY_RULE_SETUP
 #line 24 "lexer.l"
-{   /* When a number has been found, return constant */
-                tokens.push_back(atoi(yytext));
-                return CONST;
-            }
+{  tokens.push_back(yytext); return CONST; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "lexer.l"
+#line 25 "lexer.l"
 { tokens.push_back(yytext); return yytext[0]; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "lexer.l"
+#line 26 "lexer.l"
 {   /* When a string has been found that is not a keyword, it is a variable/function name */
                 tokens.push_back(yytext);
                 return VAR;
@@ -844,20 +841,20 @@ YY_RULE_SETUP
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 33 "lexer.l"
+#line 30 "lexer.l"
 { tokens.push_back(yytext); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 34 "lexer.l"
+#line 31 "lexer.l"
 { tokens.push_back(yytext); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 35 "lexer.l"
+#line 32 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 861 "lex.yy.c"
+#line 858 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1862,7 +1859,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 35 "lexer.l"
+#line 32 "lexer.l"
 
 
 int yywrap() {

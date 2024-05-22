@@ -3,6 +3,9 @@
 %{
 #include <stdio.h>
 #include "y.tab.h"
+#include<vector> 
+#include<string> 
+using namespace std; 
 %}
 %%
     /* Identify keywords */

@@ -1,12 +1,14 @@
-filename = part1
+filename = lexer
 
-$(filename).out: $(filename).l $(filename).y semantic_analysis.c main.c
-	yacc -d --debug -Wcounterexamples $(filename).y
-	lex $(filename).l
-	g++ -g lex.yy.c y.tab.c ast.c semantic_analysis.c main.c -o $(filename).out
+all: lexer parser 
+
+lexer: lexer.l
+	lex lexer.l
+
+parser: parser.y	
+	yacc -d parser.y
 
 clean:
 	rm -f lex.yy.c
 	rm -f y.tab.c
 	rm -f y.tab.h
-	rm -f part1.out

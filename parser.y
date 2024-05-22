@@ -11,7 +11,6 @@ int yyerror(const char *);
 extern FILE * yyin;
 
 using namespace std;
-astNode* root;      // global variable pointer to root node of AST
 %}
 %union{
     int ival;

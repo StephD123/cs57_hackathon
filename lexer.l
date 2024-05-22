@@ -1,7 +1,6 @@
 /*  Lex file for compiler frontend  */
 
 %{
-#include "ast.h"
 #include <stdio.h>
 #include "y.tab.h"
 %}

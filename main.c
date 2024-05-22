@@ -25,9 +25,9 @@ int min(int x, int y, int z) {
     return min({x, y, z});
 }
 
-int editDist(vector<string>& v1, vector<string>& v2){
-    int len1 = v1.size();
-    int len2 = v2.size();
+double normalizedEditDist(vector<string>& v1, vector<string>& v2){
+    float len1 = v1.size();
+    float len2 = v2.size();
     vector<vector<int>> dp(len1 + 1, vector<int>(len2 + 1));
     for(int i = 0; i < len1; i++){
         dp[i][0] = i; 
@@ -46,7 +46,7 @@ int editDist(vector<string>& v1, vector<string>& v2){
         }
     }
 
-    return dp[len1][len2];
+    return 1 - dp[len1][len2] / max(len1, len2);
 
 }
 
@@ -58,7 +58,7 @@ int editDist(vector<string>& v1, vector<string>& v2){
 *
 * Returns float similarity score (0.0-1.0).
 */
-int unorderedSim(vector<string> v1, vector<string> v2) {
+float unorderedSim(vector<string> v1, vector<string> v2) {
     int tot_tokens = v1.size() + v2.size();
 
     vector<string>::iterator it;
@@ -85,8 +85,6 @@ int unorderedSim(vector<string> v1, vector<string> v2) {
 
     int diff = v1.size() + v2.size();
     float per_same = (float) (tot_tokens - diff) / (float) tot_tokens;
-    printf("\nUnordered percent similarity: %f\n", per_same);
-
     return per_same;
 }
 
@@ -100,16 +98,6 @@ int main(int argc, char* argv[]){
     tokens.clear();
     processFile(argv[2]);
     vector<string> v2 = tokens;
-    
-    for(auto val: v1){
-        printf("%s ", val.c_str());
-    }
-    printf("starting second\n");
-    for(auto val: v2){
-        printf("%s ", val.c_str());
-    }
-    printf("%d", v2.size());
-    printf("%d", editDist(v1, v2));
-
-    unorderedSim(v1, v2);
+    float score = (unorderedSim(v1, v2) + normalizedEditDist(v1, v2)) / 2;
+    printf("Score: %f\n", score);
 }

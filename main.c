@@ -21,9 +21,12 @@ void processFile(char* filename) {
 }
 
 int main(int argc, char* argv[]){
-    if(argv != 3){
+    if(argc != 3){
         fprintf(stderr, "Usage: %s prog1.c prog2.c\n", argv[1]);
         exit(1);
     }
     processFile(argv[1]);
+    for(auto val: tokens){
+        printf("%s\n", val.c_str());
+    }
 }

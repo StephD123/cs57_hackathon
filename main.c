@@ -20,6 +20,10 @@ void processFile(char* filename) {
     fclose(file);
 }
 
+int editDist(vector<string> v1, vector<string> v2){
+
+}
+
 int main(int argc, char* argv[]){
     if(argc != 3){
         fprintf(stderr, "Usage: %s prog1.c prog2.c\n", argv[0]);

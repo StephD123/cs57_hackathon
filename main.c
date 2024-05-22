@@ -50,6 +50,46 @@ int editDist(vector<string>& v1, vector<string>& v2){
 
 }
 
+/********************* unorderedSim ********************/
+/*
+* Find similarity score of two miniC programs, unordered
+* Programs which share no tokens will have similarity score of 0.
+* Programs which share all same tokens will have similarity score of 1.0.
+*
+* Returns float similarity score (0.0-1.0).
+*/
+int unorderedSim(vector<string> v1, vector<string> v2) {
+    int tot_tokens = v1.size() + v2.size();
+
+    vector<string>::iterator it;
+    for (it = v1.begin(); it != v1.end();) {
+        vector<string>::iterator it2;
+        bool same = false;
+        for (it2 = v2.begin(); it2 != v2.end();) {
+            if (*it == *it2) {
+                same = true;
+                auto itr2 = find(v2.begin(), v2.end(), *it2);
+                if (itr2 != v2.end()) v2.erase(itr2);
+                break;
+            } else {
+                ++it2;
+            }
+        }
+        if (same) {
+            auto itr = find(v1.begin(), v1.end(), *it);
+            if (itr != v1.end()) v1.erase(itr);
+        } else{
+            ++it;
+        }
+    }
+
+    int diff = v1.size() + v2.size();
+    float per_same = (float) (tot_tokens - diff) / (float) tot_tokens;
+    printf("\nUnordered percent similarity: %f\n", per_same);
+
+    return per_same;
+}
+
 int main(int argc, char* argv[]){
     if(argc != 3){
         fprintf(stderr, "Usage: %s prog1.c prog2.c\n", argv[0]);
@@ -70,4 +110,6 @@ int main(int argc, char* argv[]){
     }
     printf("%d", v2.size());
     printf("%d", editDist(v1, v2));
+
+    unorderedSim(v1, v2);
 }

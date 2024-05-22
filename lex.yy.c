@@ -490,8 +490,9 @@ char *yytext;
 #include<vector> 
 #include<string> 
 using namespace std; 
-#line 494 "lex.yy.c"
+vector<string> tokens;
 #line 495 "lex.yy.c"
+#line 496 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -708,11 +709,11 @@ YY_DECL
 		}
 
 	{
-#line 10 "lexer.l"
+#line 11 "lexer.l"
 
-#line 12 "lexer.l"
+#line 13 "lexer.l"
     /* Identify keywords */
-#line 716 "lex.yy.c"
+#line 717 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -771,57 +772,57 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "lexer.l"
-{   printf("%s", yytext); return INT; }
+#line 14 "lexer.l"
+{tokens.push_back(yytext); return INT; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 14 "lexer.l"
+#line 15 "lexer.l"
 {   printf("%s", yytext); return IF; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 15 "lexer.l"
+#line 16 "lexer.l"
 {   printf("%s", yytext); return WHILE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 "lexer.l"
+#line 17 "lexer.l"
 {   printf("%s", yytext); return ELSE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 17 "lexer.l"
+#line 18 "lexer.l"
 {   printf("%s", yytext); return PRINT; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 18 "lexer.l"
+#line 19 "lexer.l"
 { printf("%s", yytext); return EXTERN_P; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 19 "lexer.l"
+#line 20 "lexer.l"
 { printf("%s", yytext); return EXTERN_R; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 20 "lexer.l"
+#line 21 "lexer.l"
 {   printf("%s", yytext); return RETURN; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 21 "lexer.l"
+#line 22 "lexer.l"
 {   printf("%s", yytext); return PRINT; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 22 "lexer.l"
+#line 23 "lexer.l"
 {   printf("%s", yytext); return READ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 23 "lexer.l"
+#line 24 "lexer.l"
 {   /* When a number has been found, return constant */
                 printf("%s", yytext); 
                 yylval.ival = atoi(yytext);
@@ -830,12 +831,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "lexer.l"
+#line 29 "lexer.l"
 {   printf("%s", yytext); return yytext[0]; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "lexer.l"
+#line 30 "lexer.l"
 {   /* When a string has been found that is not a keyword, it is a variable/function name */
                 printf("%s", yytext); 
                 yylval.vname = (char*)calloc(strlen(yytext) + 1,sizeof(char));
@@ -846,20 +847,20 @@ YY_RULE_SETUP
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 35 "lexer.l"
+#line 36 "lexer.l"
 { printf("%s", yytext); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 36 "lexer.l"
+#line 37 "lexer.l"
 { printf("%s", yytext); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 37 "lexer.l"
+#line 38 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 863 "lex.yy.c"
+#line 864 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1864,7 +1865,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 37 "lexer.l"
+#line 38 "lexer.l"
 
 
 int yywrap() {

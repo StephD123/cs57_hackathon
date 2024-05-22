@@ -10,7 +10,7 @@ vector<string> tokens;
 %}
 %%
     /* Identify keywords */
-"int"       {   printf("%s", yytext); return INT; }
+"int"       {tokens.push_back(yytext); return INT; }
 "if"        {   printf("%s", yytext); return IF; }
 "while"     {   printf("%s", yytext); return WHILE; }
 "else"      {   printf("%s", yytext); return ELSE; }
